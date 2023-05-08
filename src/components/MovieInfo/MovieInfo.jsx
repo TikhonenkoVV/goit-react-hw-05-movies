@@ -19,10 +19,10 @@ export const MovieInfo = () => {
             </MovieWrapper>
             <ul>
                 <li>
-                    <a href="#">Cast</a>
+                    <a href="/">Cast</a>
                 </li>
                 <li>
-                    <a href="#">Review</a>
+                    <a href="/">Review</a>
                 </li>
             </ul>
         </>
