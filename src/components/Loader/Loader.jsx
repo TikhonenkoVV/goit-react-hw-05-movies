@@ -1,5 +1,5 @@
 import { ThreeCircles } from 'react-loader-spinner';
-import { Backdrop, LoaderStyled } from './Loader.styled';
+import { Backdrop } from './Loader.styled';
 
 export const Loader = () => {
     return (

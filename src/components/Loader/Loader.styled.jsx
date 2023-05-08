@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { ThreeCircles } from 'react-loader-spinner';
 
 export const Backdrop = styled.div`
     position: fixed;
