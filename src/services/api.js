@@ -20,3 +20,10 @@ export const gethMoviesByName = async q => {
     const { data } = await axios.get('search/movie', options);
     return data;
 };
+
+export const gethMovieDetails = async (movieId, details) => {
+    const { data } = await axios.get(
+        `movie/${movieId}${details}?api_key=${API_KEY}&language=en-US`
+    );
+    return data;
+};

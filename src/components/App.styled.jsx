@@ -60,6 +60,7 @@ export const GridItem = styled.li`
     &:focus .js-overlay {
         opacity: 1;
         transform: translateY(0);
-        /* color: ${props => props.theme.colors.white}; */
     }
 `;
+
+export const BtnBack = styled;

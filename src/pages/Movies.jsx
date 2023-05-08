@@ -15,7 +15,6 @@ const Movies = () => {
     useEffect(() => {
         const query = searchParams.get('query');
         if (!query) return;
-        console.log(searchParams);
         setIsLoading(true);
         gethMoviesByName(query)
             .then(data => {

@@ -15,7 +15,8 @@ export const theme = Object.freeze({
         xxxl: '42px',
     },
     breakpoints: {
-        xs: '320px',
+        xxs: '320px',
+        xs: '480px',
         s: '768px',
         m: '1024px',
         l: '1280px',
