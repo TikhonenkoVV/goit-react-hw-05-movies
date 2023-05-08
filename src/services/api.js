@@ -1,24 +1,22 @@
 import axios from 'axios';
 
-axios.defaults.url = 'https://api.themoviedb.org/3/movie/';
-const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w200/';
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+const API_KEY = '49f12b338a85dcd14c7e661f8eadc77e';
 
-const fetchMovies = async () => {};
+export const gethMovies = async () => {
+    const { data } = await axios.get(`trending/all/day?api_key=${API_KEY}`);
+    return data;
+};
 
-export class ApiService {}
-
-// export const getImages = async (query, page) => {
-//   const options = {
-//     params: {
-//       key: API_KEY,
-//       q: query,
-//       image_type: 'photo',
-//       orientation: 'horizontal',
-//       safesearch: 'true',
-//       page: page,
-//       per_page: 12,
-//     },
-//   };
-//   const { data } = await axios('api/', options);
-//   return data;
-// };
+export const gethMoviesByName = async q => {
+    const options = {
+        params: {
+            api_key: API_KEY,
+            language: 'en-US',
+            // page: 1,
+            query: q,
+        },
+    };
+    const { data } = await axios.get('search/movie', options);
+    return data;
+};

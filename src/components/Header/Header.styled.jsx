@@ -5,8 +5,7 @@ import svg from '../../images/logo.svg';
 export const HeaderStyled = styled.header`
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: ${props => props.theme.colors.mainBackground};
-    border-bottom: 1px solid #272d30;
+    background-color: ${props => props.theme.colors.accent};
 `;
 
 export const Wrapper = styled.div`
@@ -39,6 +38,8 @@ export const NavLinkStyled = styled(NavLink)`
     font-size: ${props => props.theme.fontSizes.medium};
     font-weight: 700;
     text-transform: uppercase;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     &:hover,
     &:focus {
         color: ${props => props.theme.colors.white};

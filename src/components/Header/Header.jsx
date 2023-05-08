@@ -12,9 +12,9 @@ export const Header = () => {
         <HeaderStyled>
             <Container>
                 <Wrapper>
-                    <Logotype to={'home'} />
+                    <Logotype to={'/'} />
                     <Nav>
-                        <NavLinkStyled to={'home'}>Home</NavLinkStyled>
+                        <NavLinkStyled to={'/'}>Home</NavLinkStyled>
                         <NavLinkStyled to={'movies'}>Movies</NavLinkStyled>
                     </Nav>
                 </Wrapper>
