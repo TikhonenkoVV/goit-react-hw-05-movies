@@ -4,7 +4,7 @@ import { GoBackBtn } from 'components/GoBackBtn/GoBackBtn';
 import { Loader } from 'components/Loader/Loader';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 import { Page404 } from 'components/Page404/Page404';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { gethMovieDetails } from 'services/api';
 
@@ -45,7 +45,9 @@ const MovieDetails = () => {
                     <>
                         <MovieInfo {...movie} />
                         <DetailList />
-                        <Outlet />
+                        <Suspense>
+                            <Outlet />
+                        </Suspense>
                     </>
                 )}
                 {error && <Page404 />}
