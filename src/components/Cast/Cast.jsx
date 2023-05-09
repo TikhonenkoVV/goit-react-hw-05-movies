@@ -31,25 +31,34 @@ export const Cast = () => {
     return (
         <>
             {isLoading && <Loader />}
-            <CastTitle>Cast</CastTitle>
-            <CastGrid>
-                {cast?.map(({ credit_id, profile_path, name, character }) => (
-                    <CastElement key={credit_id}>
-                        <CastPhoto
-                            src={
-                                profile_path
-                                    ? IMAGES_BASE_URL + profile_path
-                                    : noPoster
-                            }
-                            alt="_"
-                        />
-                        <p>
-                            <b>{name}</b>
-                        </p>
-                        <p>{character}</p>
-                    </CastElement>
-                ))}
-            </CastGrid>
+            {cast.length > 0 && (
+                <>
+                    <CastTitle>Cast</CastTitle>
+                    <CastGrid>
+                        {cast?.map(
+                            ({ credit_id, profile_path, name, character }) => (
+                                <CastElement key={credit_id}>
+                                    <CastPhoto
+                                        src={
+                                            profile_path
+                                                ? IMAGES_BASE_URL + profile_path
+                                                : noPoster
+                                        }
+                                        alt="_"
+                                    />
+                                    <p>
+                                        <b>{name}</b>
+                                    </p>
+                                    <p>{character}</p>
+                                </CastElement>
+                            )
+                        )}
+                    </CastGrid>
+                </>
+            )}
+            {cast.length < 1 && (
+                <CastTitle>Sorry, no cast information available.</CastTitle>
+            )}
         </>
     );
 };

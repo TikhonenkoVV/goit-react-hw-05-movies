@@ -36,7 +36,6 @@ const MovieDetails = () => {
             });
     }, [movieId, error]);
 
-    console.log(movie);
     return (
         <section>
             {isLoading && <Loader />}

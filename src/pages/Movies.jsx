@@ -9,7 +9,8 @@ import { gethMoviesByName } from 'services/api';
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);
-    const [error, setError] = useState('');
+    const [first, setFirst] = useState(true);
+    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -26,6 +27,7 @@ const Movies = () => {
             })
             .finally(() => {
                 setIsLoading(false);
+                setFirst(false);
             });
     }, [searchParams, error]);
 
@@ -39,7 +41,7 @@ const Movies = () => {
                 {isLoading && <Loader />}
                 <SearchForm onSubmit={onSubmit} />
                 {movies && <MovieList movies={movies} />}
-                {searchParams.get('query') && movies.length < 1 && <Page404 />}
+                {!first && movies.length < 1 && <Page404 />}
             </Container>
         </section>
     );

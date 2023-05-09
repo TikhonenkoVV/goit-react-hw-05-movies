@@ -1,5 +1,11 @@
 import { Loader } from 'components/Loader/Loader';
-import { RevieAutor, RevieText, RevievItem, ReviewList } from './Review.styled';
+import {
+    RevieAutor,
+    RevieText,
+    RevievItem,
+    ReviewList,
+    ReviewTitle,
+} from './Review.styled';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { gethMovieDetails } from 'services/api';
@@ -25,19 +31,24 @@ export const Review = () => {
             });
     }, [movieId, error]);
 
-    console.log(reviews);
     return (
         <>
             {isLoading && <Loader />}
-            {reviews && (
-                <ReviewList>
-                    {reviews?.map(({ id, author, content }) => (
-                        <RevievItem key={id}>
-                            <RevieAutor>Autor: {author}</RevieAutor>
-                            <RevieText>{content}</RevieText>
-                        </RevievItem>
-                    ))}
-                </ReviewList>
+            {reviews.length > 0 && (
+                <>
+                    <ReviewTitle>Reviews</ReviewTitle>
+                    <ReviewList>
+                        {reviews?.map(({ id, author, content }) => (
+                            <RevievItem key={id}>
+                                <RevieAutor>Author: {author}</RevieAutor>
+                                <RevieText>{content}</RevieText>
+                            </RevievItem>
+                        ))}
+                    </ReviewList>
+                </>
+            )}
+            {reviews.length < 1 && (
+                <ReviewTitle>Sorry, this movie has no reviews.</ReviewTitle>
             )}
         </>
     );

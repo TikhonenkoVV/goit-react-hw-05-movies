@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { BtnSearch, Input, SearchFormStyled } from './SearchForm.styled';
 import { FiSearch } from 'react-icons/fi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const SearchForm = ({ onSubmit }) => {
     const [query, setQuery] = useState('');
@@ -12,7 +14,7 @@ export const SearchForm = ({ onSubmit }) => {
     const hendleSubmit = e => {
         e.preventDefault();
         if (!query) {
-            alert('Type a query');
+            toast('Please enter your query');
             return;
         }
         onSubmit(query);
@@ -22,10 +24,14 @@ export const SearchForm = ({ onSubmit }) => {
 
     return (
         <SearchFormStyled onSubmit={hendleSubmit}>
-            <Input onInput={hendleChange} />
+            <Input
+                placeholder="Please enter your query"
+                onInput={hendleChange}
+            />
             <BtnSearch>
                 <FiSearch size="25px" stroke="rgba(255,255,255,.5)" />
             </BtnSearch>
+            <ToastContainer />
         </SearchFormStyled>
     );
 };
