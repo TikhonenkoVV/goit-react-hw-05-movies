@@ -4,7 +4,7 @@ export const theme = Object.freeze({
         hover: '#1c2124',
         white: '#ffffff',
         light: 'rgba(255,255,255,.5)',
-        mainBackground: '#1A1D21',
+        mainBackground: '#404040',
     },
     fontSizes: {
         small: '14px',

@@ -3,6 +3,7 @@ import { DetailList } from 'components/DetailList/DetailList';
 import { GoBackBtn } from 'components/GoBackBtn/GoBackBtn';
 import { Loader } from 'components/Loader/Loader';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import { Page404 } from 'components/Page404/Page404';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { gethMovieDetails } from 'services/api';
@@ -10,10 +11,16 @@ import { gethMovieDetails } from 'services/api';
 const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [goBackLink, setGoBackLink] = useState('');
     const { movieId } = useParams();
 
     const location = useLocation();
-    const goBackLink = location?.state?.from || '/';
+
+    useEffect(() => {
+        setGoBackLink(location?.state?.from ?? '/');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         setIsLoading(true);
@@ -22,21 +29,27 @@ const MovieDetails = () => {
                 setMovie(data);
             })
             .catch(err => {
-                alert(err.massage);
+                setError(err.message);
             })
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [movieId]);
+    }, [movieId, error]);
 
+    console.log(movie);
     return (
         <section>
             {isLoading && <Loader />}
             <Container>
                 <GoBackBtn path={goBackLink}>Back to coutries</GoBackBtn>
-                <MovieInfo {...movie} />
-                <DetailList />
-                <Outlet />
+                {movie && (
+                    <>
+                        <MovieInfo {...movie} />
+                        <DetailList />
+                        <Outlet />
+                    </>
+                )}
+                {error && <Page404 />}
             </Container>
         </section>
     );

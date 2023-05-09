@@ -29,14 +29,16 @@ export const Review = () => {
     return (
         <>
             {isLoading && <Loader />}
-            <ReviewList>
-                {reviews?.map(({ id, author, content }) => (
-                    <RevievItem key={id}>
-                        <RevieAutor>Autor: {author}</RevieAutor>
-                        <RevieText>{content}</RevieText>
-                    </RevievItem>
-                ))}
-            </ReviewList>
+            {reviews && (
+                <ReviewList>
+                    {reviews?.map(({ id, author, content }) => (
+                        <RevievItem key={id}>
+                            <RevieAutor>Autor: {author}</RevieAutor>
+                            <RevieText>{content}</RevieText>
+                        </RevievItem>
+                    ))}
+                </ReviewList>
+            )}
         </>
     );
 };

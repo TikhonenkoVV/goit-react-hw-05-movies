@@ -1,6 +1,7 @@
 import { Container } from 'components/App.styled';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
+import { Page404 } from 'components/Page404/Page404';
 import { SearchForm } from 'components/SearchForm/SearchForm';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -8,7 +9,7 @@ import { gethMoviesByName } from 'services/api';
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);
-    const [error, setError] = useState([]);
+    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -22,7 +23,6 @@ const Movies = () => {
             })
             .catch(err => {
                 setError(err.message);
-                console.log(error);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -38,7 +38,8 @@ const Movies = () => {
             <Container>
                 {isLoading && <Loader />}
                 <SearchForm onSubmit={onSubmit} />
-                <MovieList movies={movies} />
+                {movies && <MovieList movies={movies} />}
+                {searchParams.get('query') && movies.length < 1 && <Page404 />}
             </Container>
         </section>
     );
