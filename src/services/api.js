@@ -10,9 +10,8 @@ export const gethMovies = async () => {
 
 export const gethMoviesByName = async (q, page) => {
     const { data } = await axios.get(
-        `search/movie?api_key=${API_KEY}&page=102&query=${q}`
+        `search/movie?api_key=${API_KEY}&page=${page}&query=${q}`
     );
-    console.log(`search/movie?api_key=${API_KEY}&query=${q}&page=${page}`);
     return data;
 };
 
