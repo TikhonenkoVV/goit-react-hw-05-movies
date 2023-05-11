@@ -4,7 +4,7 @@ import { GoBackBtn } from 'components/GoBackBtn/GoBackBtn';
 import { Loader } from 'components/Loader/Loader';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 import { Page404 } from 'components/Page404/Page404';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { gethMovieDetails } from 'services/api';
 
@@ -12,15 +12,10 @@ const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [goBackLink, setGoBackLink] = useState('');
     const { movieId } = useParams();
 
     const location = useLocation();
-
-    useEffect(() => {
-        setGoBackLink(location?.state?.from ?? '/');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const goBackLink = useRef(location?.state?.from ?? '/');
 
     useEffect(() => {
         setIsLoading(true);
@@ -34,17 +29,17 @@ const MovieDetails = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [movieId, error]);
+    }, [movieId]);
 
     return (
         <section>
             {isLoading && <Loader />}
             <Container>
-                <GoBackBtn path={goBackLink}>Back to coutries</GoBackBtn>
+                <GoBackBtn path={goBackLink}>Go back</GoBackBtn>
                 {movie && (
                     <>
                         <MovieInfo {...movie} />
-                        <DetailList />
+                        <DetailList state={{ from: location }} />
                         <Suspense>
                             <Outlet />
                         </Suspense>

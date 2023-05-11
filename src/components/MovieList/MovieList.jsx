@@ -16,10 +16,7 @@ export const MovieList = ({ movies }) => {
         <Grid>
             {data.map(({ id, movie_title, poster }) => (
                 <GridItem key={id}>
-                    <MovieLink
-                        to={`/movies/${id}` ?? '/page-404'}
-                        state={{ from: location }}
-                    >
+                    <MovieLink to={`/movies/${id}`} state={{ from: location }}>
                         <ImgWrapper>
                             <img src={poster} alt={movie_title} />
                             <CardOverlay className="js-overlay">

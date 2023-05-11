@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { gethMovieDetails } from 'services/api';
 import { Loader } from 'components/Loader/Loader';
 import noPoster from '../../images/no-poster.jpg';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Cast = () => {
     const { movieId } = useParams();
@@ -21,12 +22,12 @@ export const Cast = () => {
             })
             .catch(err => {
                 setError(err.message);
-                console.log(error);
+                toast(err.message);
             })
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [movieId, error]);
+    }, [movieId]);
 
     return (
         <>
@@ -59,6 +60,7 @@ export const Cast = () => {
             {cast.length < 1 && (
                 <CastTitle>Sorry, no cast information available.</CastTitle>
             )}
+            {error && <ToastContainer />}
         </>
     );
 };

@@ -1,13 +1,14 @@
 import { Container, HomeTitle } from 'components/App.styled';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gethMovies } from 'services/api';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [movies, setMovies] = useState([]);
-    useRef('');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setIsLoading(true);
@@ -15,6 +16,11 @@ const Home = () => {
             .then(data => {
                 setMovies(data.results);
             })
+            .catch(err => {
+                setError(err.message);
+                toast(err.message);
+            })
+
             .finally(() => {
                 setIsLoading(false);
             });
@@ -25,6 +31,7 @@ const Home = () => {
             {isLoading && <Loader />}
             <HomeTitle>Trending today</HomeTitle>
             <MovieList movies={movies} />
+            {error && <ToastContainer />}
         </Container>
     );
 };

@@ -9,6 +9,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { gethMovieDetails } from 'services/api';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Review = () => {
     const { movieId } = useParams();
@@ -25,6 +26,7 @@ export const Review = () => {
             })
             .catch(err => {
                 setError(err.message);
+                toast(err.message);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -50,6 +52,7 @@ export const Review = () => {
             {reviews.length < 1 && (
                 <ReviewTitle>Sorry, this movie has no reviews.</ReviewTitle>
             )}
+            {error && <ToastContainer />}
         </>
     );
 };

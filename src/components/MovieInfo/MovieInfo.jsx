@@ -8,14 +8,14 @@ export const MovieInfo = ({
     genres,
     poster_path,
     release_date,
+    backdrop_path,
 }) => {
     const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
     const releaseDate = new Date(release_date).getFullYear().toString();
     const rating = Math.round(vote_average * 10);
-
     return (
         <>
-            <MovieWrapper>
+            <MovieWrapper bgr={backdrop_path}>
                 <Poster
                     src={poster_path ? IMAGES_BASE_URL + poster_path : noPoster}
                     alt={title}

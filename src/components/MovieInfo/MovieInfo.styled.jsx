@@ -1,6 +1,18 @@
 import styled from '@emotion/styled';
+const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w1280/';
 
 export const MovieWrapper = styled.div`
+    padding: 30px;
+    background-image: linear-gradient(
+            90deg,
+            rgba(64, 64, 64, 1) 3%,
+            rgba(64, 64, 64, 0.87) 23%,
+            rgba(64, 64, 64, 0.87) 77%,
+            rgba(64, 64, 64, 1) 100%
+        ),
+        url(${props => IMAGES_BASE_URL + props.bgr});
+    background-repeat: no-repeat;
+    background-size: cover;
     @media (min-width: ${props => props.theme.breakpoints.xs}) {
         display: flex;
     }

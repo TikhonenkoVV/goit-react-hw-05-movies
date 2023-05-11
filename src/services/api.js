@@ -8,10 +8,11 @@ export const gethMovies = async () => {
     return data;
 };
 
-export const gethMoviesByName = async q => {
+export const gethMoviesByName = async (q, page) => {
     const { data } = await axios.get(
-        `search/movie?api_key=${API_KEY}&query=${q}`
+        `search/movie?api_key=${API_KEY}&page=102&query=${q}`
     );
+    console.log(`search/movie?api_key=${API_KEY}&query=${q}&page=${page}`);
     return data;
 };
 
