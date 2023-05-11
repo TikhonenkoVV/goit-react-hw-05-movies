@@ -31,7 +31,7 @@ export const Review = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [movieId, error]);
+    }, [movieId]);
 
     return (
         <>
